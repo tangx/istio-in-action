@@ -6,6 +6,7 @@ metadata:
     app: prod
     version: ${version}
   name: prod
+  namespace: myistio
 spec:
   replicas: 1
   selector:
@@ -29,6 +30,7 @@ metadata:
   labels:
     app: prod
   name: prod
+  namespace: myistio
 spec:
   ports:
   - name: 80-8080
