@@ -1,8 +1,8 @@
 PKG = $(shell cat go.mod | grep "^module " | sed -e "s/module //g")
-VERSION = v$(shell cat .version)
-COMMIT_SHA ?= $(shell git describe --always)
+VERSION = v$(shell cat .version)  # v1.1.1
+COMMIT_SHA ?= $(shell git describe --always)  # abcd123
 
-VERSION_MAJOR=$(shell echo $(VERSION) | cut -d '.' -f 1)
+VERSION_MAJOR=$(shell echo $(VERSION) | cut -d '.' -f 1) # v1
 
 GOBUILD=CGO_ENABLED=0 go build -a -ldflags "-X ${PKG}/version.Version=$(VERSION)"
 
