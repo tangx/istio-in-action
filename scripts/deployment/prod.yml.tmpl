@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prod
+    version: ${version}
+  name: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prod
+  template:
+    metadata:
+      labels:
+        app: prod
+    spec:
+      containers:
+      - image: uyinn28/istio-in-action-prod:${version}
+        name: prod
+        resources: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prod
+  name: prod
+spec:
+  ports:
+  - name: 80-8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: prod
+  type: ClusterIP
+

@@ -12,7 +12,7 @@ func main() {
 
 	routes(r)
 
-	if err := r.Run(":80"); err != nil {
+	if err := r.Run(":8080"); err != nil {
 		panic(err)
 	}
 }
