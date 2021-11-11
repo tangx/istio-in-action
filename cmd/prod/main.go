@@ -36,7 +36,7 @@ func listHandler(c *gin.Context) {
 }
 
 func routes(e *gin.Engine) {
-	rg := e.Group("/prods")
+	rg := e.Group("/prod")
 
 	rg.GET("/list", listHandler)
 }

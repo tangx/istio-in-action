@@ -51,7 +51,7 @@ kgall ns -L istio-injection
 
 ### 2.1 程序说明
 
-程序功能很简单， 就是在请求地址 **http://servername/prods/list** 是返回一个固定结果, 如下。
+程序功能很简单， 就是在请求地址 **http://servername/prod/list** 是返回一个固定结果, 如下。
 
 ```json
 {
