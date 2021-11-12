@@ -62,3 +62,5 @@ curl svc-prod/prod/list
 
 进入到 `Graph -> namespace (myistio) -> traffic -> service grpha` 就可以看到流量请求了
 
+![toolbox-svc-prod](`./imgs/03/toolbox-svc-prod.png)
+
