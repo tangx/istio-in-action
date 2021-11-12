@@ -84,6 +84,21 @@ istioctl install --set profile=demo -y
     Thank you for installing Istio 1.11.  Please take a few minutes to tell us about your install/upgrade experience!  https://forms.gle/kWULBRjUv7hHci7T6
 ```
 
+
+### 3.3 安装 kiali 和 prometheus
+
+kiali 是 istio 的一个可视化 dashboard， 必须配合 prometheus 一起使用才能达到最佳效果。
+
+幸运的是 istio 已经为我们准备好了所有东西。
+
+
+```bash
+# 之前已经将 istio 安装包移动到了 /usr/local/istio
+export ISTIO_HOME=/usr/local/istio
+ka -f ${ISTIO_HOME}/samples/addons/kiali.yaml
+ka -f ${ISTIO_HOME}/samples/addons/prometheus.yaml
+```
+
 ## 4. 安装快捷键
 
 ```bash
