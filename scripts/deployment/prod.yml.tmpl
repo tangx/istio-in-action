@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: prod
+    app: prod-${version_major}
     version: ${version_major}
   name: prod
   namespace: myistio
