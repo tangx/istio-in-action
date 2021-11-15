@@ -1,5 +1,12 @@
-# https://istio.io/latest/docs/reference/config/networking/gateway/
+# 使用 istio Gateway 运维外部访问 
 
+
+
+
+## 2.1. VirutalService
+
+正常情况下， 
+```yaml
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -17,7 +24,15 @@ spec:
     - destination:
         host: svc-prod
 
+```
+
+## 2.2. Gateway
+
+```yaml
+
 ---
+
+# https://istio.io/latest/docs/reference/config/networking/gateway/
 
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -35,3 +50,4 @@ spec:
     hosts:
       # - myistio/istio.tangx.in # 只针对 ns myistio 有效
       - istio.tangx.in # 所有 ns 都有效
+```
