@@ -2,7 +2,7 @@
 
 ### GET prod: 前缀模式: 匹配 x-prod
 GET http://istio.tangx.in/
-app: x-prod-anythin
+app: x-prod-anything
 
 
 ### GET reivew: 精确模式， app 的值必须是 review
@@ -10,7 +10,19 @@ GET http://istio.tangx.in/
 app: review
 
 
-### GET review: 省略 header 值， 只检测 header 是否存在
+# 违反规则的测试
+
+#### 1. header key 出现关键字将被忽略
+#  > 关键字出现， 不会被忽略
 GET http://istio.tangx.in/
 uri: app
 
+#### 2. header key 只能是 `小写字母` 和 `-`
+#  > 可以为大写
+GET http://istio.tangx.in/
+SrvReview: review
+
+#### 3. 只检测 key ，不检测 value
+#  > 无法复现
+GET http://istio.tangx.in/
+review: anything

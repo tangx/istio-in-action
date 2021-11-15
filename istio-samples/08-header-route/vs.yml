@@ -38,11 +38,43 @@ spec:
     - destination:
         host: svc-review
 
-  - name: "review-route-anything"
+## 一些违反规则的测试 ###
+  # The keys uri, scheme, method, and authority will be ignored.
+  # 其实不会被忽略
+  - name: "key (uri) in header"
     match:
     - headers:
-        uri:    # header 值省略。 值检测 header 是否存在， 不判断值内容
+        uri:    
           exact: "app"
+      uri:
+        exact: /
+    rewrite:
+      uri: /review/all
+    route:
+    - destination:
+        host: svc-review
+
+  # The header keys must be lowercase and use hyphen as the separator, e.g. x-request-id.
+  # 其实可以为大写
+  - name: "uppercase in keys"
+    match:
+    - headers:
+        SrvReview:    
+          exact: "review"
+      uri:
+        exact: /
+    rewrite:
+      uri: /review/all
+    route:
+    - destination:
+        host: svc-review
+
+  # If the value is empty and only the name of header is specfied, presence of the header is checked.
+  # 无法复现规则
+  - name: "key without value"
+    match:
+    - headers:
+        onlykey: {}  # 有 key 没有 value
       uri:
         exact: /
     rewrite:
