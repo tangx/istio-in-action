@@ -32,7 +32,7 @@ metadata:
   labels:
     app: prod
     version: ${version_major}
-  name: svc-prod-${version_major}
+  name: svc-prod
   namespace: myistio
 spec:
   ports:
@@ -42,6 +42,5 @@ spec:
     targetPort: 8080
   selector:
     app: prod
-    version: ${version_major}
   type: ClusterIP
 

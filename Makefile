@@ -15,13 +15,21 @@ docker: build
 	docker build -t uyinn28/istio-in-action-$(APPNAME):$(VERSION) -f dockerfiles/$(APPNAME).Dockerfile .
 
 apply:
-	version=$(VERSION) version_major=$(VERSION_MAJOR) envsubst < scripts/deployment/$(APPNAME).yml.tmpl | kubectl apply -f -
+	version=$(VERSION) version_major=$(VERSION_MAJOR) envsubst < scripts/deployment/$(APPNAME).tmpl.yml | kubectl apply -f -
 
 apply.docker: docker apply
 
 apply.dryrun:
-	version=$(VERSION) version_major=$(VERSION_MAJOR) envsubst < scripts/deployment/$(APPNAME).yml.tmpl
+	version=$(VERSION) version_major=$(VERSION_MAJOR) envsubst < scripts/deployment/$(APPNAME).tmpl.yml
 
 clean:
 	docker rmi `docker images -q -f dangling=true` || echo
 	rm -rf out
+
+
+prod: apply.docker
+review:
+	APPNAME=review make apply.docker
+
+review.apply.dryrun:
+	APPNAME=review make apply.dryrun

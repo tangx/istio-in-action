@@ -1,0 +1,46 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: review 
+    version: ${version_major}
+  name: review-${version_major}
+  namespace: myistio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: review
+      version: ${version_major}
+  template:
+    metadata:
+      labels:
+        app: review
+        version: ${version_major}
+    spec:
+      containers:
+      - image: uyinn28/istio-in-action-review:${version}
+        name: review
+        resources: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: review
+    version: ${version_major}
+  name: svc-review
+  namespace: myistio
+spec:
+  ports:
+  - name: 80-8089
+    port: 80
+    protocol: TCP
+    targetPort: 8089
+  selector:
+    app: review
+  type: ClusterIP
+
