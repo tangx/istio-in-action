@@ -27,10 +27,10 @@ spec:
           # server: istio-envoy
           # transfer-encoding: chunked
 
-      ### for: "istio-samples/10-http-redirect/vs.yml": admission webhook "validation.istio.io" denied the request: configuration is invalid: HTTP route cannot contain both route and redirect
       # route:
       #     - destination:
       #         host: svc-review
+          # for: "istio-samples/10-http-redirect/vs.yml": admission webhook "validation.istio.io" denied the request: configuration is invalid: HTTP route cannot contain both route and redirect
 
     - match:
         - uri:
