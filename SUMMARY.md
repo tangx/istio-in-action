@@ -15,3 +15,5 @@
 8. [VirtualService 基于 Header 重写路由](./docs/08-vs-http-rewrite-by-header.md)
 9. VirtualService 支持重写路由的所有方式
 10. [VirtualService 路由重定向](./docs/10-vs-http-redirect.md)
+11. [VirtualService 的重试机制](./docs/11-vs-http-retry.md)
+12. [VirtualService 注入错误实现混沌测试](./docs/12-vs-http-fault-injection.md)

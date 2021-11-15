@@ -1,0 +1,39 @@
+---
+# fault injection
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: review-fault-injection
+spec:
+  hosts:
+    - svc-review
+  http:
+    - match:
+      route:
+        - destination:
+            host: svc-review
+      fault:
+        delay:
+          percentage:
+            value: 50
+          fixedDelay: 5s
+
+---
+# normal prod
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-prod
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - svc-prod
+    - istio.tangx.in
+  
+  http:
+    - match:
+      route:
+        - destination:
+            host: svc-prod
+      timeout: 3s
