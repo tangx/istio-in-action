@@ -59,7 +59,7 @@ spec:
 使用如如下命令, 创建 VirtualService
 
 ```bash
-kubectl -f istio-samples/03/
+kubectl apply -f istio-samples/03/
 ```
 
 部署完成后， 进入到 toolbox 请求 svc-prod
