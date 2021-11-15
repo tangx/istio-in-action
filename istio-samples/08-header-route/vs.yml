@@ -1,0 +1,52 @@
+# https://istio.io/latest/docs/reference/config/networking/virtual-service/#HTTPMatchRequest
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-header-route
+  namespace: myistio
+spec:
+  gateways: # 选择 gateway
+    - istio-tangx-in
+  hosts:
+    - istio.tangx.in
+  http:
+  - name: "prod-route"
+    match:
+    - headers:
+        app:
+          prefix: x-prod  # 使用 前缀模式
+      uri:                # 为了更好的展示 header 路由。 这里配合 uri 的精确匹配模式
+        exact: /
+    rewrite:
+      uri: /prod/list
+    route:
+    - destination:
+        host: svc-prod
+
+  - name: "review-route"
+    match:
+    - headers:
+        app:
+          exact: review   # 使用精确模式
+      uri:
+        exact: /
+    rewrite:
+      uri: /review/all
+    route:
+    - destination:
+        host: svc-review
+
+  - name: "review-route-anything"
+    match:
+    - headers:
+        uri:    # header 值省略。 值检测 header 是否存在， 不判断值内容
+          exact: "app"
+      uri:
+        exact: /
+    rewrite:
+      uri: /review/all
+    route:
+    - destination:
+        host: svc-review

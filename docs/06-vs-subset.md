@@ -1,4 +1,4 @@
-# 使用 subset 对应用进行分组
+# VirtualService 使用 subset 对应用进行分组
 
 当一个程序并行发布多个版本的时候， 如 `prod-v1 / prod-v2`
 

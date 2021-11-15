@@ -1,0 +1,16 @@
+# header route
+
+### GET prod: 前缀模式: 匹配 x-prod
+GET http://istio.tangx.in/
+app: x-prod-anythin
+
+
+### GET reivew: 精确模式， app 的值必须是 review
+GET http://istio.tangx.in/
+app: review
+
+
+### GET review: 省略 header 值， 只检测 header 是否存在
+GET http://istio.tangx.in/
+uri: app
+

@@ -31,5 +31,5 @@ prod: apply.docker
 review:
 	APPNAME=review make apply.docker
 
-review.apply.dryrun:
+apply.dryrun.review:
 	APPNAME=review make apply.dryrun
