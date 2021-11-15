@@ -1,0 +1,8 @@
+
+# 11. http. retry
+
+### normal
+GET http://istio.tangx.in/review/all
+
+### retry
+GET http://istio.tangx.in/review/delay?delay=3
