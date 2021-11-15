@@ -5,11 +5,11 @@ metadata:
   name: review-http-redirect
   namespace: myistio
 spec:
-  gateways:
-    - istio-tangx-in
+  # gateways:
+  #   - istio-tangx-in
   hosts:
     - svc-review
-    - istio.tangx.in
+    # - istio.tangx.in
   http:
     - match:
         - uri:
@@ -19,10 +19,10 @@ spec:
         redirectCode: 302
         # authority: istio.tangx.in  # 跳转地址
 
-        # authority: srv-review
+        # authority: svc-review
           # 使用集群内部地址时， 从集群外部将无法访问
           # HTTP/1.1 302 Found
-          # location: http://srv-review/review/all
+          # location: http://svc-review/review/all
           # date: Mon, 15 Nov 2021 10:32:59 GMT
           # server: istio-envoy
           # transfer-encoding: chunked
@@ -36,5 +36,5 @@ spec:
         - uri:
             prefix: /
       route:
-          - destination:
-              host: svc-review
+        - destination:
+            host: svc-review

@@ -42,7 +42,7 @@ spec:
 curl -I  http://istio.tangx.in/review
 
     HTTP/1.1 302 Found
-    location: http://srv-review/review/all
+    location: http://svc-review/review/all
     date: Mon, 15 Nov 2021 10:32:59 GMT
     server: istio-envoy
     transfer-encoding: chunked
@@ -53,7 +53,7 @@ curl -I  http://istio.tangx.in/review
 
 ## 兼顾内群内外的重定向
 
-但是 `location: http://srv-review/review/all` 结果是集群内部地址， 而我们的请求时从集群外部发起的访问。
+但是 `location: http://svc-review/review/all` 结果是集群内部地址， 而我们的请求时从集群外部发起的访问。
 
 虽然可以将 `authority` 字段的值修改为 **集群外部地址**。
 
@@ -111,10 +111,11 @@ spec:
 for: "istio-samples/10-http-redirect/vs.yml": admission webhook "validation.istio.io" denied the request: configuration is invalid: HTTP route cannot contain both route and redirect
 ```
 
-### 使用多路由规则兼顾鱼和熊掌
+### 使用多路由规则无法兼顾鱼和熊掌
 
-虽然 `redirect` 和 `route` 不能在 **同一个** 规则下。 但是他们可以在 **不同** 规则下。
-因此使用 **多条** 路由规则即可兼得鱼和熊掌
+> 遗留问题: 虽然 `redirect` 和 `route` 不能在 **同一个** 规则下。 但是他们可以在 **不同** 规则下。 因此使用 **多条** 路由规则即可兼得鱼和熊掌 ??? 
+
+经测试发现， 如下包含 gateway 字段的 VirtualService 定义， 无法完成内网的 http-redirect。 
 
 ```yaml
 ---
@@ -146,3 +147,21 @@ spec:
           - destination:
               host: svc-review
 ```
+
+在集群内部的 toolbox 容器中的执行命令， 出现  not found 错误。
+
+```bash
+curl -I http://svc-review/review
+
+    HTTP/1.1 404 Not Found
+    date: Mon, 15 Nov 2021 11:08:00 GMT
+    server: istio-envoy
+    transfer-encoding: chunked
+```
+
+### 使用多配置兼得鱼和熊掌（不优雅）
+
+没办法， 只能创建两个配置实现内外网的重定向
+
+1. **不包含 gateway** 的 [vs.yml](/istio-samples/10-http-redirect/vs.yml) 
+2. **包含 gateway** 的 [vs-gateway.yml](/istio-samples/10-http-redirect/vs-gateway.yml) 

@@ -1,0 +1,24 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: review-http-redirect
+  namespace: myistio
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - istio.tangx.in
+  http:
+    - match:
+        - uri:
+            exact: /review
+      redirect:
+        uri: /review/all
+        redirectCode: 302
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: svc-review
