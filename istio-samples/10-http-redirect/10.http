@@ -1,0 +1,8 @@
+
+# 10. http redirect 
+
+### GET redirect
+GET http://istio.tangx.in/review
+
+###
+GET http://istio.tangx.in/review/all

@@ -1,0 +1,40 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: review-http-redirect
+  namespace: myistio
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - svc-review
+    - istio.tangx.in
+  http:
+    - match:
+        - uri:
+            exact: /review
+      redirect:
+        uri: /review/all
+        redirectCode: 302
+        # authority: istio.tangx.in  # 跳转地址
+
+        # authority: srv-review
+          # 使用集群内部地址时， 从集群外部将无法访问
+          # HTTP/1.1 302 Found
+          # location: http://srv-review/review/all
+          # date: Mon, 15 Nov 2021 10:32:59 GMT
+          # server: istio-envoy
+          # transfer-encoding: chunked
+
+      ### for: "istio-samples/10-http-redirect/vs.yml": admission webhook "validation.istio.io" denied the request: configuration is invalid: HTTP route cannot contain both route and redirect
+      # route:
+      #     - destination:
+      #         host: svc-review
+
+    - match:
+        - uri:
+            prefix: /
+      route:
+          - destination:
+              host: svc-review
