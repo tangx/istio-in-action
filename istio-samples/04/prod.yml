@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prod
+    version: v1
+  name: prod
+  namespace: myistio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prod
+  template:
+    metadata:
+      labels:
+        app: prod
+    spec:
+      containers:
+      - image: uyinn28/istio-in-action-prod:v1.0.0
+        name: prod
+        resources: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prod
+  name: svc-prod
+  namespace: myistio
+spec:
+  ports:
+  - name: 80-8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: prod
+  type: ClusterIP
+
