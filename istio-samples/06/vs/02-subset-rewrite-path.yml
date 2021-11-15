@@ -1,0 +1,46 @@
+# https://istio.io/latest/docs/reference/config/networking/virtual-service/#HTTPRewrite
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-prod
+  namespace: myistio
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - svc-prod
+    - istio.tangx.in
+  http:
+  - name: "v2-routes"      # 路由重写分组， 是针对不同的路由匹配规则
+    match:
+      - uri:
+          prefix: "/v2/prod"
+    rewrite:
+      uri: "/prod"
+    route:
+    - destination:
+        host: svc-prod
+        subset: groupv2      # subset name, 与 DestinationRule 中 subset name 定义一致
+  - name: "default-routes"
+    route:
+    - destination:
+        host: svc-prod
+        subset: groupv1
+
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: dr-prod
+spec:
+  host: svc-prod
+  subsets:
+  - name: groupv1
+    labels:
+      version: v1
+  - name: groupv2
+    labels:
+      version: v2

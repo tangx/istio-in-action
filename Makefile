@@ -19,6 +19,9 @@ apply:
 
 apply.docker: docker apply
 
+apply.dryrun:
+	version=$(VERSION) version_major=$(VERSION_MAJOR) envsubst < scripts/deployment/$(APPNAME).yml.tmpl
+
 clean:
 	docker rmi `docker images -q -f dangling=true` || echo
 	rm -rf out

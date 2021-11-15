@@ -3,19 +3,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: prod-${version_major}
+    app: prod 
     version: ${version_major}
-  name: prod
+  name: prod-${version_major}
   namespace: myistio
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: prod
+      version: ${version_major}
   template:
     metadata:
       labels:
         app: prod
+        version: ${version_major}
     spec:
       containers:
       - image: uyinn28/istio-in-action-prod:${version}
@@ -29,7 +31,8 @@ kind: Service
 metadata:
   labels:
     app: prod
-  name: svc-prod
+    version: ${version_major}
+  name: svc-prod-${version_major}
   namespace: myistio
 spec:
   ports:
@@ -39,5 +42,6 @@ spec:
     targetPort: 8080
   selector:
     app: prod
+    version: ${version_major}
   type: ClusterIP
 

@@ -67,7 +67,7 @@ spec:
     - istio-tangx-in  # 这里的名字要与 gateway 的名字匹配
   hosts:
     - svc-prod
-    - istio.tangx.in  # 使用的外部地址 FSDN。 这里的域名是 gateway hosts 中定义的
+    - istio.tangx.in  # 使用的外部地址 FQDN。 这里的域名是 gateway hosts 中定义的
   http:
   - route:
     - destination:

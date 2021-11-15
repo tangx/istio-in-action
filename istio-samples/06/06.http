@@ -1,0 +1,15 @@
+# subset
+
+# 02. 默认路由 与 路由重写(带版本的路由)
+
+### 默认路由 (v1)
+GET http://istio.tangx.in/prod/list
+
+### 路由重写 (v2)
+GET http://istio.tangx.in/v2/prod/list
+
+
+# 03. 权重路由
+
+### 权重路由
+GET http://istio.tangx.in/prod/list
