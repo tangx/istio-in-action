@@ -1,0 +1,39 @@
+
+### GET，原访问地址
+#     现在已经 404, istio 返回
+GET http://istio.tangx.in/prod/list
+
+    # HTTP/1.1 404 Not Found
+    # date: Mon, 15 Nov 2021 04:19:43 GMT
+    # server: istio-envoy
+    # connection: close
+    # content-length: 0
+
+
+### GET 使用路径重写: prefix 前缀匹配
+GET http://istio.tangx.in/p1/list
+
+### GET 使用路径重写: prefix 前缀匹配
+#     404 not found, server 返回。
+GET http://istio.tangx.in/p1/list2
+
+    # HTTP/1.1 404 Not Found
+    # content-type: text/plain
+    # date: Mon, 15 Nov 2021 04:20:09 GMT
+    # content-length: 18
+    # x-envoy-upstream-service-time: 0
+    # server: istio-envoy
+    # connection: close
+
+    # 404 page not found
+
+
+### GET 使用路径重写: exact 精确匹配
+GET http://istio.tangx.in/p2-list
+
+
+### GET 使用路径重写: regex 正则匹配(有效)
+GET http://istio.tangx.in/pr3/list
+
+### GET 使用路径重写: regex 正则匹配(无效)
+GET http://istio.tangx.in/pr4/list

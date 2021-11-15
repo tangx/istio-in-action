@@ -8,5 +8,6 @@
 
 ## 简单 Istio 配置
 
-1. [istio VirtualService 和 k8s Service](./docs/03-vs-and-service.md)
-2. [istio Gateway 和 k8s ingress](./docs/04-gateway-and-ingress.md)
+1. [istio VirtualService 和 k8s Ingress](./docs/03-vs-and-ingress.md)
+2. [创建 Gateway 允许外部访问](./docs/04-gateway.md)
+3. [VirtualService 给予路径转发](./docs/05-vs-rewrite-by-path.md)

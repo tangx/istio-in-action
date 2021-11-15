@@ -1,0 +1,43 @@
+# https://istio.io/latest/docs/reference/config/networking/virtual-service/#HTTPRewrite
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-prod
+  namespace: myistio
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - svc-prod
+    - istio.tangx.in
+  http:
+  - name: "prefix-match"  # 规则名称
+    match:
+    - uri:
+        prefix: "/p1"  # 新路径, prefix 前缀匹配， 满足 /p1 的都要被重写
+    rewrite:
+      uri: "/prod"    # 老路径
+    route:
+    - destination:
+        host: svc-prod  # 后端服务
+
+  - name: "exact-match"
+    match:
+    - uri:
+        exact: "/p2-list" # 新路径， exact 精确匹配， 只能满足 /p2-list
+    rewrite:
+      uri: "/prod/list"    # 老路径
+    route:
+    - destination:
+        host: svc-prod  # 后端服务
+
+  - name: "regex-match"
+    match:
+    - uri:
+        regex: "/pr[1-3]/.*" # 新路径, regex 正则匹配。 正则匹配的整个 uri，因此允许所有要 使用 `.*`。 正则规则使用: https://github.com/google/re2/wiki/Syntax
+    rewrite:
+      uri: "/prod/list"   # 也是精确匹配路径
+    route:
+    - destination:
+        host: svc-prod  # 后端服务
