@@ -17,6 +17,9 @@ spec:
       route:
         - destination:
             host: svc-review
+
+      timeout: 5s # 总请求时间不会操作 timeout 时常
+
       retries:  # 重试
         attempts: 3 # 重试次数（不含本身一次）， 共计 4 次。
         perTryTimeout: 2s # 间隔时间， 默认 25ms。必须大于 1ms
