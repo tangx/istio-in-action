@@ -70,11 +70,11 @@ spec:
         host: svc-review
 
   # If the value is empty and only the name of header is specfied, presence of the header is checked.
-  # 无法复现规则
   - name: "key without value"
     match:
     - headers:
-        onlykey: {}  # 有 key 没有 value
+        onlykey:
+          prefix: ""   # 有 key 没有 value
       uri:
         exact: /
     rewrite:

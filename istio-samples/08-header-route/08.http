@@ -23,6 +23,5 @@ GET http://istio.tangx.in/
 SrvReview: review
 
 #### 3. 只检测 key ，不检测 value
-#  > 无法复现
 GET http://istio.tangx.in/
-review: anything
+onlykey: anything2

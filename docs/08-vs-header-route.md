@@ -13,8 +13,8 @@
 1. Header 的 **key** 只能包含 **小写字母** 和 **连字符 `-`**。
     + 从实际测试中来看。 这个规则只是一个 **建议**。 使用 **驼峰(SrvReview)** 时依旧可以转发。
 2. Header 的 **value** 大小写敏感。
-3. 如果 Header 的值为 **空**， 则只检测 key 是否存在。
-    + 无法复现 VirtualService 规则
+3. 如果 Header 的值为 **空**， 则只检测 key 是否存在。 
+    + 将 key 的匹配 **值** 设置为 **空**。 `prefix, exact, regex` 模式均可。
 
 > https://istio.io/latest/docs/reference/config/networking/virtual-service/#HTTPMatchRequest
 
@@ -26,6 +26,8 @@
 1. prefix: 前缀模式
 2. exact: 精确模式
 3. regex: 正则模式
+
+
 ### 1. 前缀模式
 
 header 的 key 相同， value 从零开始相同。 与正则规则 `^value.*` 等价
@@ -69,7 +71,9 @@ spec:
 ```
 
 
-2. 精确模式: header 的 key,value 必须完全匹配规则。
+### 2. 精确模式
+
+header 的 key,value 必须完全匹配规则。
 
 请求方式如下
 
@@ -108,13 +112,36 @@ spec:
         host: svc-review
 ```
 
-3. 正则模式
+### 3. 正则模式
 
 略
 
 
 
-## 一些规范吧规则的测试
+## 只检测 key 不检测 value
+
+将任意匹配规则 `prefix / exact / regex` 的匹配值结果设置为 **空**。
+
+```yaml
+## 省略
+  # If the value is empty and only the name of header is specfied, presence of the header is checked.
+  - name: "key without value"
+    match:
+    - headers:
+        onlykey:
+          prefix: ""   # 有 key 没有 value
+        #   exact: ""   # 有 key 没有 value
+        #   regex: ""   # 有 key 没有 value
+      uri:
+        exact: /
+    rewrite:
+      uri: /review/all
+    route:
+    - destination:
+        host: svc-review
+```
+
+## 一些违反规范规则的测试
 
 
 ```yaml
@@ -164,19 +191,6 @@ spec:
     - destination:
         host: svc-review
 
-  # If the value is empty and only the name of header is specfied, presence of the header is checked.
-  # 无法复现规则
-  - name: "key without value"
-    match:
-    - headers:
-        onlykey: {}  # 有 key 没有 value
-      uri:
-        exact: /
-    rewrite:
-      uri: /review/all
-    route:
-    - destination:
-        host: svc-review
 ```
 
 测试结果
@@ -194,8 +208,4 @@ uri: app
 GET http://istio.tangx.in/
 SrvReview: review
 
-#### 3. 只检测 key ，不检测 value
-#  > 无法复现
-GET http://istio.tangx.in/
-review: anything
 ```
