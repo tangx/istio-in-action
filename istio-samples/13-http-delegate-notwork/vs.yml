@@ -1,0 +1,56 @@
+---
+# vs review
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-review
+  namespace: myistio-review # 注意 namespace
+spec:
+  hosts:
+    - svc-review
+  http:
+    - route:
+        - destination:
+            host: svc-review
+
+---
+# vs prod
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-prod
+  namespace: myistio-prod # 注意 namespace
+spec:
+  hosts:
+    - svc-prod
+  http:
+    - route:
+        - destination:
+            host: svc-prod
+
+---
+# vs http delegate
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-delegate
+  namespace: myistio # 注意 namespace
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - istio.tangx.in
+  http:
+    - match:
+        - uri:
+            prefix: "/prod"
+      delegate:
+        name: vs-prod   # vs name
+        namespace: myistio-prod
+    - match:
+        - uri:
+            prefix: "/review"
+      delegate:
+        name: vs-review  # vs name
+        namespace: myistio-review
+

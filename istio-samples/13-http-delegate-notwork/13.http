@@ -1,0 +1,10 @@
+# 12. 错误注入
+
+
+### prod
+GET http://istio.tangx.in/prod/list
+
+
+### review
+GET http://istio.tangx.in/review/all
+

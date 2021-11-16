@@ -17,3 +17,4 @@
 10. [VirtualService 路由重定向](./docs/10-vs-http-redirect.md)
 11. [VirtualService 的重试机制](./docs/11-vs-http-retry.md)
 12. [VirtualService 注入错误实现混沌测试](./docs/12-vs-http-fault-injection.md)
+13. VirtualService 委托（测试失败)
