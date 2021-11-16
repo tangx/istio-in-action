@@ -21,8 +21,5 @@
 13. VirtualService 委托: 测试失败
 14. [VirtualService Header 管理](./docs/14-vs-http-header-operation.md)
 15. VirutalService 根据客户端 Label 转发路由(sourceLabels): 待测试
-
-## Gateway
-
 17. [Gateway 支持 https 访问 - 标准模式](./docs/17-gw-https-support-standard.md)
 
