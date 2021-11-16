@@ -27,8 +27,8 @@ clean:
 	rm -rf out
 
 
-prod: apply.docker
-review:
+prod.apply: apply.docker
+review.apply:
 	APPNAME=review make apply.docker
 
 apply.dryrun.review:

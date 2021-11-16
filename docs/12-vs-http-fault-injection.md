@@ -21,4 +21,13 @@ time curl http://istio.tangx.in/prod/list
     real    0m3.014s
     user    0m0.004s
     sys     0m0.005s
+
+
+time curl http://istio.tangx.in/prod/list
+
+    {"error":"Error: svc-review request abort. resp code is 400, failed","message":"获取评论失败， 内部错误"}
+
+    real	0m0.011s
+    user	0m0.005s
+    sys	0m0.004s
 ```

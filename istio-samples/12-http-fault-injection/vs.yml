@@ -18,6 +18,10 @@ spec:
             value: 50
           fixedDelay: 5s
 
+        abort:
+          percentage:
+            value: 50
+          httpStatus: 400
 ---
 # normal prod
 apiVersion: networking.istio.io/v1alpha3

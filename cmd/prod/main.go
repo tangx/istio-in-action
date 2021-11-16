@@ -26,7 +26,7 @@ func listHandler(c *gin.Context) {
 	reviews, err := getReivews()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"error":   err,
+			"error":   err.Error(),
 			"message": "获取评论失败， 内部错误",
 		})
 		return
@@ -59,6 +59,10 @@ func getReivews() (map[string]model.Review, error) {
 		return nil, fmt.Errorf("reqeust svc-review failed: %v", err)
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("Error: svc-review request abort. resp code is %d, failed", resp.StatusCode)
+	}
 
 	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
