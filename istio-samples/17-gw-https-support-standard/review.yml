@@ -1,0 +1,45 @@
+# version=v1.1.0   version_major=v1  envsubst < scripts/deployment/review.tmpl.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: review 
+    version: v1
+  name: review-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: review
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: review
+        version: v1
+    spec:
+      containers:
+      - image: uyinn28/istio-in-action-review:v1.1.4
+        name: review
+        resources: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: review
+    version: v1
+  name: svc-review
+spec:
+  ports:
+  - name: 80-8089
+    port: 80
+    protocol: TCP
+    targetPort: 8089
+  selector:
+    app: review
+  type: ClusterIP
+

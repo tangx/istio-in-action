@@ -1,0 +1,31 @@
+---
+# https://istio.io/latest/docs/reference/config/networking/gateway/
+
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: istio-tangx-in
+  namespace: myistio
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+      - istio.tangx.in
+    tls:
+      httpsRedirect: true
+
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+      - "*.tangx.in"
+    tls:
+      mode: SIMPLE
+      credentialName: wild-tangx-in
+

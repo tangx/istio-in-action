@@ -5,8 +5,9 @@
 1. [安装 docker, k3s, istio 环境](./docs/01-install.md)
 2. [初始化第一个项目 - prod](./docs/02-initial-project.md)
 7. [升级项目 - prod and review](./docs/07-upgrade-project.md)
+16. [使用 lego 创建 https 证书](./docs/16-lego-create-server-certificate.md)
 
-## 简单 Istio 配置
+## VirtualService
 
 3. [istio VirtualService 和 k8s Ingress](./docs/03-vs-and-ingress.md)
 4. [创建 Gateway 允许外部访问](./docs/04-gateway.md)
@@ -20,3 +21,8 @@
 13. VirtualService 委托: 测试失败
 14. [VirtualService Header 管理](./docs/14-vs-http-header-operation.md)
 15. VirutalService 根据客户端 Label 转发路由(sourceLabels): 待测试
+
+## Gateway
+
+17. [Gateway 支持 https 访问 - 标准模式](./docs/17-gw-https-support-standard.md)
+

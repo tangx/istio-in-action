@@ -1,0 +1,9 @@
+# 12. header 操作
+
+### http
+GET http://istio.tangx.in/review/header
+
+
+### https
+GET https://istio.tangx.in/review/header
+
