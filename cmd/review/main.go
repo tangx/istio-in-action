@@ -46,13 +46,20 @@ func delayHanlder(c *gin.Context) {
 }
 
 func headerHanlder(c *gin.Context) {
-	header := c.GetHeader("header-injection")
-	if header != "" {
+
+	for key, value := range c.Request.Header {
+		c.Header(key, fmt.Sprintf("%s", value))
+
+		// logrus.Infof("key=> %s , value=> %s", key, value)
+	}
+
+	headerInjection := c.GetHeader("header-injection")
+	if headerInjection != "" {
 		c.Header("remove-header", "this remove-header is invisible")
 		c.JSON(http.StatusOK, gin.H{
 			"code":    "success",
 			"message": "header 注入成功",
-			"header":  fmt.Sprintf("header-injection value is = %s", header),
+			"header":  fmt.Sprintf("header-injection value is = %s", headerInjection),
 		})
 
 		return

@@ -18,6 +18,13 @@ spec:
         request:
           set:
             header-injection: "anything"
+          add:
+            header-add-not-exist: "not-exist"
+            header-add-exist: "if-overwrite"
+          remove:
+            - header-should-remove
+            - "header-should-remove2"
+
       match:
         - uri:
             prefix: /header/review

@@ -10,6 +10,9 @@ header-injection: anything
 
 ###  header operation
 GET http://istio.tangx.in/header/review/header
-
-
-
+# anything, 被 envoy 覆盖
+header-injection: user-request
+# header-exist if-overwrite, 被 envoy 追加
+header-add-exist: header-exist
+# 不存在， 被 envoy 删除
+header-should-remove: anything 

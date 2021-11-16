@@ -20,7 +20,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: uyinn28/istio-in-action-review:v1.1.3
+      - image: uyinn28/istio-in-action-review:v1.1.4
         name: review
         resources: {}
 
