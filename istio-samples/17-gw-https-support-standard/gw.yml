@@ -17,7 +17,8 @@ spec:
     hosts:
       - istio.tangx.in
     tls:
-      httpsRedirect: true
+      # httpsRedirect: true
+      httpsRedirect: false
 
   - port:
       number: 443
