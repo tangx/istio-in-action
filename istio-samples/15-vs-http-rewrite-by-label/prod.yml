@@ -1,0 +1,47 @@
+# version=v1.1.0   version_major=v1  envsubst < scripts/deployment/prod.tmpl.yml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: prod 
+    version: v1
+  name: prod-v1
+  namespace: myistio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prod
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: prod
+        version: v1
+    spec:
+      containers:
+      - image: uyinn28/istio-in-action-prod:v1.1.2
+        name: prod
+        resources: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: prod
+    version: v1
+  name: svc-prod
+  namespace: myistio
+spec:
+  ports:
+  - name: 80-8080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: prod
+  type: ClusterIP
+

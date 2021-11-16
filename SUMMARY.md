@@ -17,5 +17,6 @@
 10. [VirtualService 路由重定向](./docs/10-vs-http-redirect.md)
 11. [VirtualService 的重试机制](./docs/11-vs-http-retry.md)
 12. [VirtualService 注入错误实现混沌测试](./docs/12-vs-http-fault-injection.md)
-13. VirtualService 委托（测试失败)
+13. VirtualService 委托: 测试失败
 14. [VirtualService Header 管理](./docs/14-vs-http-header-operation.md)
+15. VirutalService 根据客户端 Label 转发路由(sourceLabels): 待测试

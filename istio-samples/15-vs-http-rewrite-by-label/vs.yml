@@ -1,0 +1,39 @@
+---
+# vs-reivew
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-reivew
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - istio.tangx.in
+  http:
+    - route:
+        - destination:
+            host: svc-review
+      match:
+        - sourceLabels:
+            app: review
+
+---
+# vs-prod
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-prod
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - istio.tangx.in
+  http:
+    - route:
+        - destination:
+            host: svc-prod
+      match:
+        - sourceLabels:
+            app: prod
+      rewrite:
+        

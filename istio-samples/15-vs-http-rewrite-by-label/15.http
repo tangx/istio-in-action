@@ -1,0 +1,2 @@
+# 14. 通过 label 进行流量
+GET http://istio.tangx.in/prod/list
