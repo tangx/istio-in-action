@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -14,6 +15,7 @@ func main() {
 
 	r.GET("/review/all", reviewHandler)
 	r.GET("/review/delay", delayHanlder)
+	r.GET("/review/header", headerHanlder)
 
 	if err := r.Run(":8089"); err != nil {
 		panic(err)
@@ -41,6 +43,26 @@ func delayHanlder(c *gin.Context) {
 
 	// 返回结果
 	reviewHandler(c)
+}
+
+func headerHanlder(c *gin.Context) {
+	header := c.GetHeader("header-injection")
+	if header != "" {
+		c.Header("remove-header", "this remove-header is invisible")
+		c.JSON(http.StatusOK, gin.H{
+			"code":    "success",
+			"message": "header 注入成功",
+			"header":  fmt.Sprintf("header-injection value is = %s", header),
+		})
+
+		return
+	}
+
+	c.JSON(http.StatusBadRequest, gin.H{
+		"code":    "failed",
+		"message": "header 注入失败",
+	})
+
 }
 
 func init() {

@@ -1,0 +1,15 @@
+# 12. header 操作
+
+### default request without header
+GET http://istio.tangx.in/review/header
+
+### default request
+GET http://istio.tangx.in/review/header
+header-injection: anything
+
+
+###  header operation
+GET http://istio.tangx.in/header/review/header
+
+
+

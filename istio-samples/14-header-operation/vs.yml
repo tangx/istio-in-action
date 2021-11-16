@@ -1,0 +1,38 @@
+---
+# vs review
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-review
+  namespace: myistio # 注意 namespace
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - istio.tangx.in
+    - svc-review
+  http:
+    # header 操作
+    - name: "header-operation"
+      headers:            # request header 操作与 route 在一层
+        request:
+          set:
+            header-injection: "anything"
+      match:
+        - uri:
+            prefix: /header/review
+      rewrite:
+        uri: /review
+      route:
+        - destination:
+            host: svc-review
+          headers:      # response header 操作在 route 下一层
+            response:
+              remove:
+              - remove-header
+
+    # 默认路由
+    - name: "default-review"
+      route:
+        - destination:
+            host: svc-review
