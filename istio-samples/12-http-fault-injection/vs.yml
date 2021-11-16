@@ -8,8 +8,7 @@ spec:
   hosts:
     - svc-review
   http:
-    - match:
-      route:
+    - route:
         - destination:
             host: svc-review
       fault:
@@ -36,8 +35,7 @@ spec:
     - istio.tangx.in
   
   http:
-    - match:
-      route:
+    - route:
         - destination:
             host: svc-prod
       timeout: 3s
