@@ -1,4 +1,4 @@
-# VirtualService 使用 subset 对应用进行分组
+# 使用 DestinationRule Subset 进行路由分组(版本控制)
 
 当一个程序并行发布多个版本的时候， 如 `prod-v1 / prod-v2`
 
@@ -116,8 +116,8 @@ spec:
 使用如下命令进行测试
 
 ```bash
-ka -f istio-samples/06/
-ka -f istio-samples/06/vs/03-subset-weight.yml
+ka -f istio-samples/06-dr-subset/
+ka -f istio-samples/06-dr-subset/vs/03-subset-weight.yml
 ```
 
 
