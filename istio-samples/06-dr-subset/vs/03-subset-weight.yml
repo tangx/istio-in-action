@@ -16,11 +16,11 @@ spec:
     route:                  # 同一个 route 下面的两个 destination
     - destination:
         host: svc-prod
-        subset: groupv1
+        subset: subset-groupv1
       weight: 25
     - destination:
         host: svc-prod
-        subset: groupv2
+        subset: subset-groupv2
       weight: 75
 
 ---
@@ -32,9 +32,9 @@ metadata:
 spec:
   host: svc-prod
   subsets:
-  - name: groupv1
+  - name: subset-groupv1
     labels:
       version: v1
-  - name: groupv2
+  - name: subset-groupv2
     labels:
       version: v2

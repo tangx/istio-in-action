@@ -21,12 +21,12 @@ spec:
     route:
     - destination:
         host: svc-prod
-        subset: groupv2      # subset name, 与 DestinationRule 中 subset name 定义一致
+        subset: subset-groupv2      # subset name, 与 DestinationRule 中 subset name 定义一致
   - name: "default-routes"
     route:
     - destination:
         host: svc-prod
-        subset: groupv1
+        subset: subset-groupv1
 
 
 ---
@@ -38,9 +38,9 @@ metadata:
 spec:
   host: svc-prod
   subsets:
-  - name: groupv1
+  - name: subset-groupv1
     labels:
       version: v1
-  - name: groupv2
+  - name: subset-groupv2
     labels:
       version: v2
