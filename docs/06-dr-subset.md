@@ -71,10 +71,10 @@ metadata:
 spec:
   host: svc-prod
   subsets:
-  - name: groupv1
+  - name: subset-groupv1
     labels:
       version: v1
-  - name: groupv2
+  - name: subset-groupv2
     labels:
       version: v2
 ```
@@ -104,11 +104,11 @@ spec:
     route:                  # 同一个 route 下面的两个 destination
     - destination:
         host: svc-prod
-        subset: groupv1     # subset 的值与 DestinationRule 中定义一致
+        subset: subset-groupv1     # subset 的值与 DestinationRule 中定义一致
       weight: 25
     - destination:
         host: svc-prod
-        subset: groupv2
+        subset: subset-groupv2
       weight: 75
 ```
 
@@ -151,12 +151,12 @@ spec:
     route:
     - destination:
         host: svc-prod
-        subset: groupv2
+        subset: subset-groupv2
   - name: "default-routes"   # 可以说是默认分组
     route:
     - destination:
         host: svc-prod
-        subset: groupv1
+        subset: subset-groupv1
 ```
 
 使用如下命令进行测试
@@ -194,6 +194,6 @@ spec:
     route:
     - destination:
         host: svc-prod      # 目的地址是 svc
-        subset: groupv1
+        subset: subset-groupv1
   # .....
 ```

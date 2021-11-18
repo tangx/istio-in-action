@@ -1,0 +1,33 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: vs-prod
+  namespace: myistio
+spec:
+  gateways:
+    - istio-tangx-in
+  hosts:
+    - svc-prod
+    - istio.tangx.in
+  http:
+  - name: "v1-subset"
+    route:
+    - destination:
+        host: svc-prod
+
+
+---
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: dr-prod
+spec:
+  host: svc-prod
+  trafficPolicy:
+    loadBalancer:
+      # simple: RANDOM
+      simple: ROUND_ROBIN
+      # simple: PASSTHROUGH
+      # simple: LEAST_CONN
