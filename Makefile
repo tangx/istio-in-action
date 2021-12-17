@@ -33,3 +33,7 @@ review.apply:
 
 dryrun.review:
 	APPNAME=review make apply.dryrun
+
+
+book:
+	bash hugobook-builder.sh

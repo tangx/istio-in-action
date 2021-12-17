@@ -1,2 +1,6 @@
 out/
 out/*
+
+hugobook-builder
+hugobook-builder.sh
+

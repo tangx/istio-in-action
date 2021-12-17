@@ -1,0 +1,51 @@
+name: Github-Pages-push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    # defaults:
+    #   run:
+    #     working-directory: ./
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+
+
+      - uses: actions/checkout@master
+        with:
+          name: tangx/hugobook-builder #     <-- clone https://github.com/org1/repo1
+          ref: master
+
+      - name: create blog
+        run: |
+          cp -a ./docs/* hugobook-builder/content/
+          cp README.md hugobook-builder/content//_index.md
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.84.0'
+          extended: true
+
+      - name: Build
+        run: |
+          cd hugobook-builder
+          hugo --gc --minify --cleanDestinationDir --baseURL=https://books.tangx.in/istio-in-action/
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'hugobook-builder/public'
+          destination-github-username: 'tangx'
+          destination-repository-name: 'hugobook'
+          user-email: uyinn@live.com
+          target-branch: master
+          target-directory: '/istio-in-action'
