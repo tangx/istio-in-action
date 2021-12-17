@@ -27,6 +27,7 @@ jobs:
       - name: create blog
         run: |
           find ./ -maxdepth 2
+          env
           cp -a ./docs/* hugobook-builder/content/
           cp README.md hugobook-builder/content//_index.md
 
