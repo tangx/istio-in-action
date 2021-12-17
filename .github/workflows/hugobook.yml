@@ -1,4 +1,4 @@
-name: Github-Pages-push
+name: hugo-book auto build 
 
 on:
   push:
@@ -17,10 +17,10 @@ jobs:
           submodules: true
 
 
-      - uses: actions/checkout@master
-        with:
-          name: tangx/hugobook-builder #     <-- clone https://github.com/org1/repo1
-          ref: master
+      # - uses: actions/checkout@master
+      #   with:
+      #     name: tangx/hugobook-builder #     <-- clone https://github.com/org1/repo1
+      #     ref: master
 
       - name: create blog
         run: |
