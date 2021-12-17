@@ -24,12 +24,17 @@ jobs:
           submodules: true
           path: hugobook-builder
 
+
       - name: create blog
         run: |
           find ./ -maxdepth 2
           env
           cp -a ./docs/* hugobook-builder/content/
           cp README.md hugobook-builder/content//_index.md
+
+      - name: show env
+        run: |
+          env
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
