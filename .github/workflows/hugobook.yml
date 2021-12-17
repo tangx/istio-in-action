@@ -17,13 +17,11 @@ jobs:
           submodules: true
 
       # https://github.com/actions/checkout#checkout-multiple-repos-nested
-      - uses: actions/checkout@master
+      - name: Checkout hugo-builder
+        uses: actions/checkout@v2
         with:
-          name: tangx/hugobook-builder #     <-- clone https://github.com/org1/repo1
-          ref: master
-          submodules: true
+          repository: tangx/hugobook-builder
           path: hugobook-builder
-
 
       - name: create blog
         run: |
