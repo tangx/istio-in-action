@@ -18,7 +18,7 @@
 10. [VirtualService 路由重定向](./10-vs-http-redirect.md)
 11. [VirtualService 的重试机制](./11-vs-http-retry.md)
 12. [VirtualService 注入错误实现混沌测试](./12-vs-http-fault-injection.md)
-13. VirtualService 委托: 测试失败
+13. [VirtualService 委托，即流量转发](./13-vs-http-delegate.md)
 14. [VirtualService Header 管理](./14-vs-http-header-operation.md)
 15. VirutalService 根据客户端 Label 转发路由(sourceLabels): 待测试
 17. [Gateway 支持 https 访问 - 标准模式](./17-gw-https-support-standard.md)

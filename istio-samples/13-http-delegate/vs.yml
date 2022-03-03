@@ -6,8 +6,8 @@ metadata:
   name: vs-review
   namespace: myistio-review # 注意 namespace
 spec:
-  hosts:
-    - svc-review
+  # hosts:               # 这里不能设置 hosts
+  #   - svc-review
   http:
     - route:
         - destination:
@@ -21,8 +21,9 @@ metadata:
   name: vs-prod
   namespace: myistio-prod # 注意 namespace
 spec:
-  hosts:
-    - svc-prod
+  # hosts:                  # 这里不能设置 hosts， 即使是对外暴露的相同域名也不行,
+                            # 否则可能出现 404 
+  #   - myistio.tangx.in
   http:
     - route:
         - destination:
