@@ -75,7 +75,7 @@ spec:
     + (3) srv-review 返回应答给 srv-prod 
     + (4) srv-prod 组合应答信息，统一返回 user
 
-![data-flow.png](./imgs/12/12-data-flow.png)
+![data-flow.png](../imgs/12/12-data-flow.png)
 
 除了上述提到的 srv-review 的错误注入。
 
