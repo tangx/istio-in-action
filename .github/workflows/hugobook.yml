@@ -20,7 +20,7 @@ jobs:
       - name: Checkout hugo-builder
         uses: actions/checkout@v2
         with:
-          repository: tangx/hugobook-builder
+          repository: tangx/geekdoc-hugo-book-builder
           path: hugobook-builder
 
 
