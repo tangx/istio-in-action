@@ -1,4 +1,4 @@
-baseURL = "https://books.tangx.in/istio-in-action/"
+baseURL = "https://tangx.in/books/istio-in-action/"
 title = "《istio in action》 实践指南"
 theme = "hugo-geekdoc"
 
