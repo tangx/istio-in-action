@@ -6,7 +6,7 @@
 
 效果如下:
 
-![header-route](../imgs/08/08-header-route.png)
+![header-route](/docs/imgs/08/08-header-route.png)
 
 使用 Header 匹配有几个必要条件
 

@@ -76,5 +76,5 @@ spec:
 
 通过请求可以看到
 
-![17-standard-istio](../imgs/17/17-standard-https.png)
+![17-standard-istio](/docs/imgs/17/17-standard-https.png)
 

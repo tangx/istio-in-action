@@ -5,7 +5,7 @@
 > https://istio.io/latest/docs/reference/config/networking/virtual-service/#Delegate
 
 
-![delegate.png](../imgs/13/delegate.png)
+![delegate.png](/docs/imgs/13/delegate.png)
 
 如下 VirtualService 的 **流量委托** 定义， 是在 `myistio` 这个命名空间中创建的。 但是将 `myistio.tangx.in/prod` 的流量转发到了命名空间 `myistio-prod` 中的 `prod` 服务中； 同样将 `myistio.tangx.in/reviews` 的流量转发到了命名空间 `myistio-review` 中的 `review` 服务中。
 
@@ -58,7 +58,7 @@ spec:
 
 同样需要 **注意** 在定义 **被委托对象(`vs-prod`)** 时， 不能指定 `.spec.hosts` 的值， 否则流量转发异常， 可能出现 404。
 
-![delegate-404.png](../imgs/13/delegate-404.png)
+![delegate-404.png](/docs/imgs/13/delegate-404.png)
 
 
 如果熟悉 nginx 的话， 可能会很好理解

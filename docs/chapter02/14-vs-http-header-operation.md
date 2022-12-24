@@ -117,5 +117,5 @@ header-add-exist: header-exist
 header-should-remove: anything 
 ```
 
-![header-operation](../imgs/14/14-header-operation.png)
+![header-operation](/docs/imgs/14/14-header-operation.png)
 

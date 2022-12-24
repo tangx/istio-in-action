@@ -90,6 +90,6 @@ kubectl apply -f istio-samples/04/
 
 使用 [04.http](/istio-samples/04/04.http) 的 GET 请求进行测试
 
-![gateway result](../imgs/04/04-gateway.png)
+![gateway result](/docs/imgs/04/04-gateway.png)
 
 > 注意:  使用访问的外部域名 `istio.tangx.in` 一定要进行 dns 解析。 或使用 `/etc/resolv.conf` 进行绑定。
